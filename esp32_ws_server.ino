@@ -4,8 +4,8 @@
 #include <ArduinoJson.h>
 
 // SSID and password of Wifi connection:
-const char* ssid = "SpectrumSetup-BA";
-const char* password = "quickacre283";
+const char* ssid = "";
+const char* password = "";
 
 WebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
