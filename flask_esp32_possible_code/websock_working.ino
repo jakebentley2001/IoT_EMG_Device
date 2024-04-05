@@ -1,9 +1,9 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
 
-const char* ssid = "SpectrumSetup-BA";
-const char* password = "quickacre283";
-const char* webSocketServerAddress = "192.168.1.29";
+const char* ssid = "Benno is him";
+const char* password = "bennoissupercool";
+const char* webSocketServerAddress = "192.168.0.184";
 const int webSocketServerPort = 5000; // Port of your WebSocket server
 
 WebSocketsClient webSocket;
