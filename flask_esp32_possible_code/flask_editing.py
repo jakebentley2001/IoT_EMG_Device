@@ -1,36 +1,30 @@
-#This installed version Werkzeug 2.0.0
-# Flask 2.3.3 Flask-SocketIO 4.3.1
-# python-engineio 3.13.2 python-socketio 4.6.0
-from flask import Flask, render_template, Request
-from flask_socketio import SocketIO, emit
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+import requests
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*",path = '/socket.io')
 
-connected_clients = set()
-
-@socketio.on('connect')
-def handle_connect():
-    sid = socketio.sid
-    connected_clients.add(sid)
-    print("Client connected:", sid)
-
-@socketio.on('disconnect')
-def handle_disconnect():
-    sid = request.sid
-    connected_clients.remove(sid)
-    print("Client disconnected:", sid)
-
-@socketio.on('123')
-def handle_message(message):
-    print("Received message from client:", message)
-    # Broadcast the received message to all connected clients
-    for client in connected_clients:
-        emit('123', message, room=client)
+#cors_allowed_origins=["http://192.168.0.184:3000", "file://", "ws://192.168.0.100:3000/socket.io/?EIO=4"]
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-if __name__ == "__main__":
-    socketio.run(app, host='0.0.0.0', port=5000)
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+    
+@socketio.on('message')  # Handle incoming messages from clients
+def handle_message(message):
+    print('Received message from client:', message)
+
+@socketio.on('Button value changed')
+def handle_button_value(data):
+    print('Button value changed:', data)
+    # Handle the received button value here
+    # For demonstration purposes, let's broadcast the received value to all clients
+    socketio.emit('update value', data)
+
+if __name__ == '__main__':
+    socketio.run(app, host='0.0.0.0', port=3000)
