@@ -14,8 +14,8 @@ def index():
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
-    
-@socketio.on('message')  # Handle incoming messages from clients
+       
+@socketio.on('my_event')
 def handle_message(message):
     print('Received message from client:', message)
 
@@ -25,6 +25,11 @@ def handle_button_value(data):
     # Handle the received button value here
     # For demonstration purposes, let's broadcast the received value to all clients
     socketio.emit('update value', data)
+    
+@socketio.on('json')
+def handle_json(json):
+    print('received json: ' + str(json))
+    
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=3000)
