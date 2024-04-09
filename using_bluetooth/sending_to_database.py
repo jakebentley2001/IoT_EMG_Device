@@ -15,9 +15,10 @@ SERVICE_UUID = "19B10000-E8F2-537E-4F6C-D104768A1214"
 CHARACTERISTIC_UUID = "19B10001-E8F2-537E-4F6C-D104768A1214"
 
 # Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')
-db = client['your_database']  # Replace 'your_database' with your database name
-collection = db['your_collection']  # Replace 'your_collection' with your collection name
+client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?ssl=true')
+#ServerlessInstance0
+db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
+collection = db['muscle_data']  # Replace 'your_collection' with your collection name
 
 
 # Initialize lists to store received data
@@ -50,46 +51,60 @@ async def read_data(address):
 
             # Add a delay between readings
             await asyncio.sleep(0.05)
+            
+                # Prepare data for insertion
+    data_to_insert = [{"time_data": time_data[i], "sensor_data": sensor_data[i]} for i in range(len(time_data))]
+    
+    # Insert collected data into MongoDB collection
+    if data_to_insert:
+        collection.insert_many(data_to_insert)
 
 @app.route('/')
 def index():
     return "Hello, this is your Flask app!"
 
+# @app.route('/data')
+# def display_data():
+#     # Return the collected data as JSON
+#     return {
+#         "time_data": time_data,
+#         "sensor_data": sensor_data
+#     }
+
 @app.route('/data')
 def display_data():
-    # Return the collected data as JSON
-    return {
-        "time_data": time_data,
-        "sensor_data": sensor_data
-    }
-    
-@app.route('/get_data', methods=['GET'])
-def get_data():
     # Retrieve data from MongoDB collection
-    cursor = collection.find({}, {'_id': 0})  # Exclude _id field from the results
-    data = list(cursor)  # Convert cursor to list
+    data = list(collection.find({}, {'_id': 0}))
+    return jsonify(data)
 
-    # Format the data as a pretty list
-    pretty_list = [f"{index+1}. {entry}" for index, entry in enumerate(data)]
+    
+# @app.route('/get_data', methods=['GET'])
+# def get_data():
+#     # Retrieve data from MongoDB collection
+#     cursor = collection.find({}, {'_id': 0})  # Exclude _id field from the results
+#     data = list(cursor)  # Convert cursor to list
 
-    return jsonify(pretty_list)
+#     # Format the data as a pretty list
+#     pretty_list = [f"{index+1}. {entry}" for index, entry in enumerate(data)]
+
+#     return jsonify(pretty_list)
     
 
     
-@app.route('/add_data', methods=['POST'])
-def add_data():
+# @app.route('/add_data', methods=['POST'])
+# def add_data():
     
-    data = {
-        "time_data": time_data,
-        "sensor_data": sensor_data
-    }
+#     data = {
+#         "time_data": time_data,
+#         "sensor_data": sensor_data
+#     }
 
-    if data:
-        # Insert document into MongoDB collection
-        inserted_data = collection.insert_one(data)
-        return jsonify({'message': 'Data added successfully', 'inserted_id': str(inserted_data.inserted_id)})
-    else:
-        return jsonify({'error': 'No data received'})
+#     if data:
+#         # Insert document into MongoDB collection
+#         inserted_data = collection.insert_one(data)
+#         return jsonify({'message': 'Data added successfully', 'inserted_id': str(inserted_data.inserted_id)})
+#     else:
+#         return jsonify({'error': 'No data received'})
 
 if __name__ == "__main__":
     # Replace 'your_device_address' with the actual address of your Arduino BLE peripheral
