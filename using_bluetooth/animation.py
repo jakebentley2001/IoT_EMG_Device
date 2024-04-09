@@ -24,7 +24,8 @@ def update_plot(i):
 async def read_data(address, loop):
     async with BleakClient(address, loop=loop) as client:
         # Wait for the connection to be established
-        await client.is_connected()
+        if not client.is_connected:
+            await client.connect()
         print("Connected!")
 
         # Read the data from the characteristic and plot it
