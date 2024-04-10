@@ -18,8 +18,9 @@ CHARACTERISTIC_UUID = "19B10001-E8F2-537E-4F6C-D104768A1214"
 client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
 #ServerlessInstance0
 db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
-collection = db['recording_data']  # Replace 'your_collection' with your collection name
+collection = db['muscle_data']  # Replace 'your_collection' with your collection name
 
+record = 2
 
 # Initialize lists to store received data
 time_data = []
@@ -53,42 +54,38 @@ async def read_data(address):
             await asyncio.sleep(0.05)
             
                 # Prepare data for insertion
-    data_to_insert = [{"metadata": { "recordId": 1, "typ": "EMG" },
-                       "timestamp": time_data[i],
-                       "sensor_val": sensor_data[i]} for i in range(len(time_data))]
+ 
+    
+    data_to_insert = {"record_number": record, "data": [time_data , sensor_data]}
+
     # Insert collected data into MongoDB collection
     if data_to_insert:
-        collection.insert_many(data_to_insert)
+        collection.insert_one(data_to_insert)
+        
+    #document = collection.find_one({"record_number": record})
+
+    #print(document)  
 
 @app.route('/')
 def index():
     return "Hello, this is your Flask app!"
 
-# @app.route('/data')
-# def display_data():
-#     # Return the collected data as JSON
-#     return {
-#         "time_data": time_data,
-#         "sensor_data": sensor_data
-#     }
 
 @app.route('/data')
 def display_data():
-    # Retrieve data from MongoDB collection
-    cursor = collection.find({"recordId": 1})
-    data = list(cursor)
-  # Format data for the list (optional, customize based on your needs)
-    formatted_data = []
-    for document in data:
-        formatted_data.append({
-        "recordId": document["metadata"]["recordId"],
-        "timestamp": document["timestamp"],
-        "sensor_val": document["sensor_val"]
-        })
+    record_to_find = 1
+    
+    # Filter based on record_number
+    document = collection.find_one({"record_number": record_to_find})
 
-    return jsonify(formatted_data)
+
+  # Format data for the list (optional, customize based on your needs)
+
+    return jsonify(document["data"])
 
     
+
+
 # @app.route('/get_data', methods=['GET'])
 # def get_data():
 #     # Retrieve data from MongoDB collection
