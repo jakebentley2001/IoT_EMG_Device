@@ -3,7 +3,7 @@ import struct
 import threading 
 from bleak import BleakClient
 import time
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template, request
 from pymongo import MongoClient
 
 # Initialize Flask app
@@ -20,7 +20,7 @@ client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstan
 db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
 collection = db['muscle_data']  # Replace 'your_collection' with your collection name
 
-record = 2
+record = "2"
 
 # Initialize lists to store received data
 time_data = []
@@ -68,22 +68,31 @@ async def read_data(address):
 
 @app.route('/')
 def index():
-    return "Hello, this is your Flask app!"
+    #return "Hello, this is your Flask app!"
+    return render_template('index.html')
 
 
 @app.route('/data')
 def display_data():
-    record_to_find = 1
     
     # Filter based on record_number
-    document = collection.find_one({"record_number": record_to_find})
+    document = collection.find_one({"record_number": record})
 
-
-  # Format data for the list (optional, customize based on your needs)
 
     return jsonify(document["data"])
 
-    
+
+@app.route('/get_recording', methods=['POST'])
+def get_recording():
+    record_number = request.form.get('record_number')
+
+    # Retrieve data from database (replace with your logic)
+    document = collection.find_one({"record_number": record_number})
+
+    if document:
+        return render_template('index.html', result=document)
+    else:
+        return render_template('index.html', error="Record not found!")
 
 
 # @app.route('/get_data', methods=['GET'])
