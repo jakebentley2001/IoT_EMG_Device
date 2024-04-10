@@ -15,7 +15,7 @@ SERVICE_UUID = "19B10000-E8F2-537E-4F6C-D104768A1214"
 CHARACTERISTIC_UUID = "19B10001-E8F2-537E-4F6C-D104768A1214"
 
 # Connect to MongoDB
-client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?ssl=true')
+client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
 #ServerlessInstance0
 db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
 collection = db['muscle_data']  # Replace 'your_collection' with your collection name
