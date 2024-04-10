@@ -18,7 +18,7 @@ CHARACTERISTIC_UUID = "19B10001-E8F2-537E-4F6C-D104768A1214"
 client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
 #ServerlessInstance0
 db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
-collection = db['muscle_data']  # Replace 'your_collection' with your collection name
+collection = db['recording_data']  # Replace 'your_collection' with your collection name
 
 
 # Initialize lists to store received data
@@ -53,8 +53,9 @@ async def read_data(address):
             await asyncio.sleep(0.05)
             
                 # Prepare data for insertion
-    data_to_insert = [{"time_data": time_data[i], "sensor_data": sensor_data[i]} for i in range(len(time_data))]
-    
+    data_to_insert = [{"metadata": { "recordId": 1, "typ": "EMG" },
+                       "timestamp": time_data[i],
+                       "sensor_val": sensor_data[i]} for i in range(len(time_data))]
     # Insert collected data into MongoDB collection
     if data_to_insert:
         collection.insert_many(data_to_insert)
@@ -74,8 +75,18 @@ def index():
 @app.route('/data')
 def display_data():
     # Retrieve data from MongoDB collection
-    data = list(collection.find({}, {'_id': 0}))
-    return jsonify(data)
+    cursor = collection.find({"recordId": 1})
+    data = list(cursor)
+  # Format data for the list (optional, customize based on your needs)
+    formatted_data = []
+    for document in data:
+        formatted_data.append({
+        "recordId": document["metadata"]["recordId"],
+        "timestamp": document["timestamp"],
+        "sensor_val": document["sensor_val"]
+        })
+
+    return jsonify(formatted_data)
 
     
 # @app.route('/get_data', methods=['GET'])
