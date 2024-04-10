@@ -72,14 +72,27 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/data')
-def display_data():
+# @app.route('/data')
+# def display_data():
     
-    # Filter based on record_number
+#     # Filter based on record_number
+#     document = collection.find_one({"record_number": record})
+
+
+#     return jsonify(document["data"])
+
+@app.route('/get_recording_data', methods=['GET'])
+def get_recording_data():
+    # Retrieve data from database (replace with your logic)
     document = collection.find_one({"record_number": record})
-
-
-    return jsonify(document["data"])
+    
+    record_number = document["record_number"]
+    sensor_data = document['data'][1]
+    time_data = document['data'][0]
+    
+    
+    # ...
+    return jsonify({"record_number": record_number, "data": sensor_data})
 
 
 @app.route('/get_recording', methods=['POST'])
@@ -94,34 +107,6 @@ def get_recording():
     else:
         return render_template('index.html', error="Record not found!")
 
-
-# @app.route('/get_data', methods=['GET'])
-# def get_data():
-#     # Retrieve data from MongoDB collection
-#     cursor = collection.find({}, {'_id': 0})  # Exclude _id field from the results
-#     data = list(cursor)  # Convert cursor to list
-
-#     # Format the data as a pretty list
-#     pretty_list = [f"{index+1}. {entry}" for index, entry in enumerate(data)]
-
-#     return jsonify(pretty_list)
-    
-
-    
-# @app.route('/add_data', methods=['POST'])
-# def add_data():
-    
-#     data = {
-#         "time_data": time_data,
-#         "sensor_data": sensor_data
-#     }
-
-#     if data:
-#         # Insert document into MongoDB collection
-#         inserted_data = collection.insert_one(data)
-#         return jsonify({'message': 'Data added successfully', 'inserted_id': str(inserted_data.inserted_id)})
-#     else:
-#         return jsonify({'error': 'No data received'})
 
 if __name__ == "__main__":
     # Replace 'your_device_address' with the actual address of your Arduino BLE peripheral

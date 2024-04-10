@@ -1,20 +1,45 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flask and HTML Demo</title>
-</head>
+    <title>My Flask App with Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>  </head>
 <body>
-    <h1>Enter a record number:</h1>
-    <form action="/get_recording" method="POST">
-        <input type="number" name="record_number">
-        <button type="submit">Get Recording</button>
-    </form>
+    <h1>My Recording Data</h1>
+    <canvas id="myChart"></canvas>
+    <script>
+        // Assuming you have a Flask route to retrieve data (replace with your logic)
+fetch('/get_recording_data')
+.then(response => response.json())
+.then(data => {
+  const recordNumber = data.record_number;
+  const sensorData = data.data;  // Replace with actual data field name
 
-    {% if result %}
-        <h2>Record Data:</h2>
-        <p>Record Number: {{ result.record_number }}</p>
-        <p>Data: {{ result.data }}</p>
-    {% endif %}
+  // Chart.js configuration
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'line',  // Choose chart type (e.g., line, bar, pie)
+    data: {
+      labels: [...Array(sensorData.length).keys()],  // Generate labels for data points
+      datasets: [{
+        label: `Record #${recordNumber}`,
+        data: sensorData,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+});
+
+    </script>
 </body>
 </html>
