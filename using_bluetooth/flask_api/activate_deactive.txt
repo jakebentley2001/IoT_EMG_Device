@@ -1,0 +1,5 @@
+#In order to activate enviroment in command line
+source env/bin/activate
+
+#In order to deactivate enviroment
+deactivate
