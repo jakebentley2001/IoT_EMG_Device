@@ -20,7 +20,7 @@ client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstan
 db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
 collection = db['muscle_data']  # Replace 'your_collection' with your collection name
 
-record = "4"
+record = "7"
 
 # Initialize lists to store received data
 time_data = []
