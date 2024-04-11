@@ -20,44 +20,13 @@ client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstan
 db = client['IOT_DEVICE']  # Replace 'your_database' with your database name
 collection = db['muscle_data']  # Replace 'your_collection' with your collection name
 
-record = "7"
+record = "9"
 
 # Initialize lists to store received data
 time_data = []
 sensor_data = []
 startup = 0
-# async def read_data(address):
-#     global is_recording  # Access the global variable
-    
 
-#     start_time = time.time()
-
-#     async with BleakClient(address) as client:
-#         # Wait for the connection to be established
-#         if not client.is_connected:
-#             await client.connect()
-#         print("Connected!")
-#         is_recording = True
-
-#         # Read the data from the characteristic and plot it
-#         while is_recording:  # Check for recording state
-#             try:
-#                 value = await client.read_gatt_char(CHARACTERISTIC_UUID)
-#                 sensor_val = struct.unpack('<f', value)[0]
-#                 print("Received data:", sensor_val)
-
-#                 time_data.append(len(time_data) + 0.5)
-#                 sensor_data.append(sensor_val)
-
-#             except Exception as e:
-#                 print("Error reading data:", e)
-
-#             await asyncio.sleep(0.05)
-
-#     # Prepare and insert data if recording was not prematurely stopped
-#     if is_recording:
-#         data_to_insert = {"record_number": record, "data": [time_data, sensor_data]}
-#         collection.insert_one(data_to_insert)
 
 async def read_data(address):
     start_time = time.time()
@@ -107,18 +76,6 @@ def stop_recording():
     #return jsonify({'record_number': 1, 'data': sensor_data})  # Return final data
 
 
-# @app.route('/get_recording_data', methods=['GET'])
-# def get_recording_data():
-#     # Retrieve data from database (replace with your logic)
-#     document = collection.find_one({"record_number": record})
-    
-#     record_number = document["record_number"]
-#     sensor_data = document['data'][1]
-#     time_data = document['data'][0]
-    
-#     # ...
-#     return jsonify({"record_number": record_number, "data": sensor_data})
-
 @app.route('/get_recording', methods=['GET'])  # New route for fetching specific records
 def get_recording():
     record_number = request.args.get('record_number')  # Get record number from query parameter
@@ -137,18 +94,6 @@ def get_recording():
     else:
         return jsonify({"error": "Missing record_number parameter"}), 400
 
-
-# @app.route('/get_recording', methods=['POST'])
-# def get_recording():
-#     record_number = request.form.get('record_number')
-
-#     # Retrieve data from database (replace with your logic)
-#     document = collection.find_one({"record_number": record_number})
-
-#     if document:
-#         return render_template('index.html', result=document)
-#     else:
-#         return render_template('index.html', error="Record not found!")
 
 
 if __name__ == "__main__":
