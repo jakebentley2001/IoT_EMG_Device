@@ -1,8 +1,13 @@
 from flask import Flask, jsonify, render_template, request
 from pymongo import MongoClient
 from dotenv import load_dotenv
+import os
+
 
 app = Flask(__name__)
+load_dotenv()
+
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG')
 
 # Connect to MongoDB
 client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
@@ -32,4 +37,4 @@ def get_recording():
         return jsonify({"error": "Missing record_number parameter"}), 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
