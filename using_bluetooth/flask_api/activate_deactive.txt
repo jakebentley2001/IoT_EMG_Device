@@ -3,3 +3,10 @@ source env/bin/activate
 
 #In order to deactivate enviroment
 deactivate
+
+#gcloud path
+/Users/jakebentley/Downloads/google-cloud-sdk/bin/gcloud
+
+#to upload new code do 
+/Users/jakebentley/Downloads/google-cloud-sdk/bin/gcloud run deploy --source .
+
