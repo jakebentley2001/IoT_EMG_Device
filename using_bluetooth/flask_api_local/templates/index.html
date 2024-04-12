@@ -1,62 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Flask App with Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Image Overlay</title>
+    <!-- Include Leaflet CSS file -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+         crossorigin=""/>
+    <style>
+        /* Define the height of the map container */
+        #map { height: 500px; }
+    </style>
 </head>
 <body>
-    <h1>My Recording Data</h1>
-    <input type="text" id="record-number-input" placeholder="Enter record number">
-    <button onclick="fetchRecord()">Fetch Data</button>
-    <canvas id="myChart"></canvas>
+    <!-- Put a div element with id "map" for the image container -->
+    <div id="map"></div>
+    
+    <!-- Include Leaflet JavaScript file -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+         crossorigin=""></script>
 
     <script>
-        let myChart; // Variable to hold the chart instance
+        // Initialize the map
+        var map = L.map('map');
 
-        function fetchRecord() {
-            const recordNumber = document.getElementById('record-number-input').value;
+        // Set the bounds of the image (change the coordinates accordingly)
+        var bounds = [[0, 0], [1000, 1000]]; // Example bounds for a 1000x1000 image
 
-            if (recordNumber) {
-                fetch(`/get_recording?record_number=${recordNumber}`)  // Pass record number as a query parameter
-                    .then(response => response.json())
-                    .then(data => {
-                        const recordNumber = data.record_number;
-                        const sensorData = data.data;  // Replace with actual data field name
-                        
-                        // Clear existing chart if it exists
-                        if (myChart) {
-                            myChart.destroy();
-                        }
+        // Add your own image overlay
+        //using_bluetooth/flask_api_local/templates/images/muscles.png
+        L.imageOverlay('using_bluetooth/flask_api_local/templates/images/muscles.png', bounds).addTo(map);
 
-                        // Chart.js configuration
-                        const ctx = document.getElementById('myChart').getContext('2d');
-                        myChart = new Chart(ctx, {
-                            type: 'line',  // Choose chart type (e.g., line, bar, pie)
-                            data: {
-                            labels: [...Array(sensorData.length).keys()],  // Generate labels for data points
-                            datasets: [{
-                                label: `Record #${recordNumber}`,
-                                data: sensorData,
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1
-                            }]
-                            },
-                            options: {
-                            scales: {
-                                yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                                }]
-                            }
-                            }
-                        });
-                    });
-            } else {
-                alert("Please enter a valid record number.");
-            }
-        }
+        // Set the view to the bounds of the image
+        map.fitBounds(bounds);
     </script>
 </body>
 </html>

@@ -13,7 +13,7 @@ CHARACTERISTIC_UUID = "19B10001-E8F2-537E-4F6C-D104768A1214"
 client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
 db = client['IOT_DEVICE']
 collection = db['muscle_data']
-record = "22"
+record = "24"
 
 time_data = []
 sensor_data = []

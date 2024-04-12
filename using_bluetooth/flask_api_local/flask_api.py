@@ -2,7 +2,7 @@ from flask import Flask, jsonify, render_template, request
 from pymongo import MongoClient
 
 
-app = Flask(__name__)
+app = Flask(__name__ )
 
 # Connect to MongoDB
 client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
@@ -11,7 +11,7 @@ collection = db['muscle_data']
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 @app.route('/get_recording', methods=['GET'])
 def get_recording():
