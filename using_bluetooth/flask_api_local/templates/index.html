@@ -11,6 +11,8 @@
     <canvas id="myChart"></canvas>
 
     <script>
+        let myChart; // Variable to hold the chart instance
+
         function fetchRecord() {
             const recordNumber = document.getElementById('record-number-input').value;
 
@@ -20,10 +22,15 @@
                     .then(data => {
                         const recordNumber = data.record_number;
                         const sensorData = data.data;  // Replace with actual data field name
+                        
+                        // Clear existing chart if it exists
+                        if (myChart) {
+                            myChart.destroy();
+                        }
 
                         // Chart.js configuration
                         const ctx = document.getElementById('myChart').getContext('2d');
-                        const myChart = new Chart(ctx, {
+                        myChart = new Chart(ctx, {
                             type: 'line',  // Choose chart type (e.g., line, bar, pie)
                             data: {
                             labels: [...Array(sensorData.length).keys()],  // Generate labels for data points
