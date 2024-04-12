@@ -27,22 +27,44 @@
         // Initialize the map
         var map = L.map('map');
 
-        // Set the bounds of the image (change the coordinates accordingly)
+        // Set the bounds of the image
         var bounds = [[0, 0], [500, 200]];
-        
-        var pec_major = L.polygon([[79.6556, 36.7382],[80.1336, 42.1875],[80.2235, 50.1855],[78.3671, 50.8007],
-        [77.9707, 47.1972],[78.2782, 38.9355],[79.08846, 37.7050]]).addTo(map);
-        
-        var lat = L.polygon([[78.8361, 132.0117], [78.87, 139.834],
-         [78.2424, 142.1191], [77.6177, 145.2832], [75.431, 145.0195],
-          [72.6858, 143.1738], [73.3279, 139.4824], [74.8679, 135.6152],
-           [76.6189, 134.5605], [78.0073, 132.627]]).addTo(map)// Example bounds for a 1000x1000 image
-        
+
         // Add your own image overlay
         L.imageOverlay("{{url_for('static', filename='muscles.png')}}", bounds).addTo(map);
 
         // Set the view to the bounds of the image
         map.fitBounds(bounds);
+
+        // Array to store clicked coordinates
+        var clickedPoints = [];
+
+        // Event listener for click event on the map
+        map.on('click', function(e) {
+            // Store the coordinates of the clicked point
+            clickedPoints.push(e.latlng);
+            // Output the list of clicked points coordinates to the console
+            console.log('Clicked points coordinates:', clickedPoints);
+
+            // Send the coordinates to the server
+            fetch('/save-coordinates', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(clickedPoints)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Coordinates sent to server successfully.');
+                } else {
+                    console.error('Failed to send coordinates to server.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
     </script>
 </body>
 </html>

@@ -11,7 +11,7 @@ collection = db['muscle_data']
 
 @app.route('/')
 def index():
-    return render_template('index2.html')
+    return render_template('index.html')
 
 @app.route('/get_recording', methods=['GET'])
 def get_recording():
@@ -30,6 +30,14 @@ def get_recording():
             return jsonify({"error": f"Error retrieving record: {str(e)}"}), 500
     else:
         return jsonify({"error": "Missing record_number parameter"}), 400
+    
+    
+@app.route('/save-coordinates', methods=['POST'])
+def save_coordinates():
+    data = request.json
+    formatted_coordinates = [[round(point['lat'], 4), round(point['lng'], 4)] for point in data]
+    print('Received coordinates:', formatted_coordinates)
+    return 'Coordinates received successfully.'
 
 if __name__ == "__main__":
     app.run(debug=True)
