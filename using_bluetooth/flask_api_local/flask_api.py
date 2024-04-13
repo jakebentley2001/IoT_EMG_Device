@@ -11,7 +11,7 @@ collection = db['muscle_data']
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('createpoly.html')
 
 @app.route('/get_recording', methods=['GET'])
 def get_recording():
