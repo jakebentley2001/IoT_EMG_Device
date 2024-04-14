@@ -10,7 +10,7 @@
          crossorigin=""/>
     <style>
         /* Define the height of the map container */
-        #map { height: 500px; width: 1000px}
+        #map { height: 500px; width: 500px; margin: auto; position: relative;}
     </style>
 </head>
 <body>
@@ -28,7 +28,7 @@
         var map = L.map('map');
 
         // Set the bounds of the image
-        var bounds = [[0, 0], [500, 200]];
+        var bounds = [[-76.9999, -74.5313], [87.5997, 270.7031]];
 
         // Add your own image overlay
         L.imageOverlay("{{url_for('static', filename='muscles.png')}}", bounds).addTo(map);

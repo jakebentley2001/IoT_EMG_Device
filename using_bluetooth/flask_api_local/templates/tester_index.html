@@ -16,8 +16,8 @@
     </style>
 </head>
 <body>
-    <h1>Choose a Muscle!</h1>
-    <p>Select which muscle you would like to monitor during your workout</p>
+    <h1>Nice Title</h1>
+    <p>This is a nice paragraph describing something about the map.</p>
     <!-- Put a div element with id "map" for the image container -->
     <div id="map"></div>
     
@@ -35,12 +35,11 @@
         var bounds = [[0, 0], [500, 200]];
         
         var pec_major = L.polygon([[79.6556, 36.7382],[80.1336, 42.1875],[80.2235, 50.1855],[78.3671, 50.8007],[77.9707, 47.1972],[78.2782, 38.9355],[79.08846, 37.7050]]).addTo(map);
-     
+       
         var pec_major2 = L.polygon([[80.1787, 54.1406], [78.3494, 53.4375], [77.8418, 58.1836], [78.1526, 65.5664], [78.3849, 66.9727], [79.5923, 68.0273], [80.0884, 62.4023], [80.2236, 55.2832], [80.1937, 54.2285]]).addTo(map);
-     
-
-        var lat = L.polygon([[78.8361, 132.0117], [78.87, 139.834],[78.2424, 142.1191], [77.6177, 145.2832], [75.431, 145.0195],[72.6858, 143.1738], [73.3279, 139.4824], [74.8679, 135.6152],[76.6189, 134.5605], [78.0073, 132.627]]).addTo(map);  
-     
+        
+        var lat1 = L.polygon([[78.8361, 132.0117], [78.87, 139.834],[78.2424, 142.1191], [77.6177, 145.2832], [75.431, 145.0195],[72.6858, 143.1738], [73.3279, 139.4824], [74.8679, 135.6152],[76.6189, 134.5605], [78.0073, 132.627]]).addTo(map);  
+        
         var lat2 = L.polygon([[72.7119, 151.084], [73.4284, 154.8633],[74.7989, 158.7305], [76.0161, 158.9063], [77.4469, 161.1914],[78.3671, 162.2461], [78.7849, 162.4219], [78.802, 157.4121],[78.8361, 154.248], [78.2782, 151.7871], [77.7862, 149.3262],[77.118, 148.623], [75.7156, 149.1504], [74.3785, 149.8535],[72.9712, 150.6445]]).addTo(map);
 
         var upper_pec = L.polygon([[79.6872, 36.6943], [80.111, 42.0996],[80.231, 49.9658], [80.4741, 48.999], [80.7394, 43.7256],[80.6969, 41.1328], [80.3864, 38.3203], [80.0277, 36.4307],[79.7656, 36.167]]).addTo(map);
@@ -75,7 +74,7 @@
 
         var rear_delt2 = L.polygon([[80.9146, 157.9395],[80.4303, 161.543], [80.2087, 163.3887], [79.7343, 165.4102],[79.2372, 168.4863], [78.9714, 170.6836], [79.7499, 170.1562],[80.2385, 170.5957], [80.7747, 169.2773], [81.0523, 166.9922],[81.2149, 162.9492], [81.2014, 160.1367], [81.0386, 158.5547]]).addTo(map);
 
-        var trap = L.polygon([[81.255, 131.9238], [81.1068, 134.6484],[80.8169, 136.4063], [80.4595, 137.1973], [79.6714, 138.3398],[79.0384, 139.4824], [78.4554, 141.5918], [77.8973, 143.9648],[77.4851, 145.8984], [77.466, 146.6016], [78.543, 145.9863],[79.5446, 145.9863], [80.2831, 145.6348], [80.9699, 145.459],[81.2417, 143.7012], [81.4008, 141.1523], [81.4532, 137.1973],[81.4139, 134.5605], [81.3481, 132.0117]]).addTo(map);
+        var trap1 = L.polygon([[81.255, 131.9238], [81.1068, 134.6484],[80.8169, 136.4063], [80.4595, 137.1973], [79.6714, 138.3398],[79.0384, 139.4824], [78.4554, 141.5918], [77.8973, 143.9648],[77.4851, 145.8984], [77.466, 146.6016], [78.543, 145.9863],[79.5446, 145.9863], [80.2831, 145.6348], [80.9699, 145.459],[81.2417, 143.7012], [81.4008, 141.1523], [81.4532, 137.1973],[81.4139, 134.5605], [81.3481, 132.0117]]).addTo(map);
 
         var trap2 = L.polygon([[77.5988, 148.7109], [78.3494, 152.4023],[79.0384, 154.5117], [79.7812, 156.0938], [80.4303, 156.9727],[80.9837, 158.7305], [81.2417, 163.0371], [81.3745, 157.6758],[81.4008, 153.1934], [81.2684, 150.3809], [80.9975, 148.623],[80.1787, 148.5352], [79.3352, 148.623], [78.4554, 148.5352],[77.9707, 148.3594]]).addTo(map);
 
@@ -89,7 +88,7 @@
 
         var teres_major2 = L.polygon([[79.2781, 154.6875],[78.87, 153.9844], [78.819, 159.873], [78.8531, 162.2021],[79.2454, 163.3447], [79.8045, 163.4326], [80.3275, 163.2129],[80.2831, 162.334], [79.9205, 160.708], [79.5286, 158.3789],[79.3515, 156.7529]]).addTo(map);
 
-        var Infraspinatus = L.polygon([[80.3423, 131.1328],[79.8433, 133.3301], [79.4162, 135.791], [79.2372, 139.043],[79.7029, 138.9551], [80.2831, 137.7246], [80.7747, 136.6699],[80.9007, 135.5273], [80.5897, 133.418], [80.3423, 131.3086]]).addTo(map);
+        var Infraspinatus1 = L.polygon([[80.3423, 131.1328],[79.8433, 133.3301], [79.4162, 135.791], [79.2372, 139.043],[79.7029, 138.9551], [80.2831, 137.7246], [80.7747, 136.6699],[80.9007, 135.5273], [80.5897, 133.418], [80.3423, 131.3086]]).addTo(map);
 
         var Infraspinatus2 = L.polygon([[79.2863, 154.9512],[79.4162, 158.6426], [79.8123, 160.9277], [80.2979, 163.3008],[80.6041, 160.2246], [80.8868, 158.291], [80.4157, 156.6211],[79.9359, 155.918], [79.3677, 155.0391]]).addTo(map);
 
@@ -129,7 +128,7 @@
 
         var inner_hamstring2 = L.polygon([[64.6991, 153.5449], [62.5123, 153.5449], [58.2633, 151.6992], [54.9271, 153.6328], [50.1206, 155.2148], [54.7246, 157.5879], [56.7045, 158.2031], [60.5438, 157.1484], [63.4701, 156.2695], [64.8489, 155.3906]]).addTo(map);
 
-        var glute = L.polygon([[68.9742, 131.9238], [65.9106, 132.5391], [64.3209, 133.0664], [65.0351, 137.0215], [65.0721, 142.998], [66.1605, 146.0742], [67.204, 146.6895], [68.2694, 145.9863], [70.1105, 143.7891], [71.636, 143.5254], [70.9597, 140.0098], [70.3779, 136.6699], [69.5345, 133.5059]]).addTo(map);
+        var glutes = L.polygon([[68.9742, 131.9238], [65.9106, 132.5391], [64.3209, 133.0664], [65.0351, 137.0215], [65.0721, 142.998], [66.1605, 146.0742], [67.204, 146.6895], [68.2694, 145.9863], [70.1105, 143.7891], [71.636, 143.5254], [70.9597, 140.0098], [70.3779, 136.6699], [69.5345, 133.5059]]).addTo(map);
 
         var glute2 = L.polygon([[71.5666, 150.3809], [69.9905, 150.3369], [68.4799, 148.5791], [67.626, 147.6123], [65.9644, 148.3594], [65.1646, 151.3477], [64.9794, 155.1709], [64.9049, 158.4668], [64.4538, 160.752], [66.7399, 161.543], [69.1782, 161.543], [70.3335, 157.8516], [71.0883, 153.5449], [71.5666, 151.3477]]).addTo(map);
 
@@ -146,143 +145,6 @@
 
         // Set the view to the bounds of the image
         map.fitBounds(bounds);
-
-        map.zoomIn();
-
-        var polygons = [pec_major, pec_major2, lat, lat2, upper_pec,upper_pec2,front_delt,front_delt2,side_delt,side_delt2,bicep,bicep2,forearm,forearm2,lateral_tricep,lateral_tricep2,long_tricep,long_tricep2,rear_delt,rear_delt2,trap,trap2,low_back,upper_trap,upper_trap2,teres_major,teres_major2,Infraspinatus,Infraspinatus2,rectus_femoris,rectus_femoris2,vastus_lateralis,vastus_lateralis2,vastus_medialis,vastus_medialis2,tibia,tibia2,sartorius,sartorius2,calf,calf2,abductor,abductor2,outer_hamstring,outer_hamstring2,inner_hamstring,inner_hamstring2,glute,glute2,upper_abs,lower_abs,obliques,obliques2];
-
-
-        function makePolygonsTransparent(polygons) {
-            polygons.forEach(function(polygon) {
-                polygon.setStyle({fillOpacity: 0});
-            });
-        }
-
-        function makePolygonsOutlineTransparent(polygons) {
-            polygons.forEach(function(polygon) {
-                polygon.setStyle({opacity: 0});
-            });
-        }
-
-                // Function to handle mouse events for specific polygons
-        function handleMouseEvents(poly, poly2, e) {
-            poly.setStyle({opacity: e.type === 'mouseover' ? 1 : 0});
-            poly2.setStyle({opacity: e.type === 'mouseover' ? 1 : 0});
-        }
-
-        // Function to attach event listeners to polygons
-        function attachEventListeners(poly, poly2) {
-            poly.on('mouseover', function(e) {
-                handleMouseEvents(poly, poly2, e); 
-            });
-            poly2.on('mouseover', function(e) {
-                handleMouseEvents(poly, poly2, e); 
-            });
-            poly.on('mouseout', function(e) {
-                handleMouseEvents(poly, poly2, e);
-            });
-            poly2.on('mouseout', function(e) {
-                handleMouseEvents(poly, poly2, e);
-            });
-        }
-
-        function handleMouseClick(poly, poly2) {
-            poly.setStyle({fillOpacity: 0.5});
-            poly2.setStyle({fillOpacity: 0.5});
-        }
-        
-        // Function to attach click event listeners to polygons
-        function attachClickEventListeners(poly, poly2) {
-            poly.on('click', function() {
-                handleMouseClick(poly, poly2);
-            });
-            poly2.on('click', function() {
-                handleMouseClick(poly, poly2);
-            });
-        }
-
-       // makePolygonsTransparent(polygons);
-       // makePolygonsOutlineTransparent(polygons);
-        // Attach event listeners for pec_major polygons
-        //attachEventListeners(outer_hamstring,outer_hamstring2);
-        //attachEventListeners(inner_hamstring,inner_hamstring2);
- 
-
-
-        //attachClickEventListeners(outer_hamstring,outer_hamstring2);
-        //attachClickEventListeners(inner_hamstring,inner_hamstring2);
-
-
-
-        makePolygonsTransparent(polygons);
-        makePolygonsOutlineTransparent(polygons);
-// Attach event listeners for pec_major polygons
-        attachEventListeners(outer_hamstring,outer_hamstring2);
-        attachEventListeners(inner_hamstring,inner_hamstring2);
-        attachEventListeners(glute,glute2);
-        attachEventListeners(upper_abs,upper_abs);
-        attachEventListeners(calf,calf2);
-        attachEventListeners(lower_abs,lower_abs);
-        attachEventListeners(obliques,obliques2);
-        attachEventListeners(vastus_lateralis,vastus_lateralis2);
-        attachEventListeners(vastus_medialis,vastus_medialis2);
-        attachEventListeners(tibia,tibia2);
-        attachEventListeners(sartorius,sartorius2);
-        attachEventListeners(calf,calf2);
-        attachEventListeners(abductor,abductor2);
-        attachEventListeners(pec_major, pec_major2);
-        attachEventListeners(lat, lat2);
-        attachEventListeners(upper_pec,upper_pec2);
-        attachEventListeners( front_delt,front_delt2);
-        attachEventListeners(side_delt,side_delt2);
-        attachEventListeners(bicep,bicep2);
-        attachEventListeners(forearm,forearm2);
-        attachEventListeners(lateral_tricep,lateral_tricep2);
-        attachEventListeners(long_tricep,long_tricep2);
-        attachEventListeners(rear_delt,rear_delt2);
-        attachEventListeners(trap,trap2);
-        attachEventListeners(low_back,low_back);
-        attachEventListeners(upper_trap,upper_trap2);
-        attachEventListeners(teres_major,teres_major2);
-        attachEventListeners(Infraspinatus,Infraspinatus2);
-        attachEventListeners(rectus_femoris,rectus_femoris2);
-
-
-        attachClickEventListeners(outer_hamstring,outer_hamstring2);
-        attachClickEventListeners(inner_hamstring,inner_hamstring2);
-        attachClickEventListeners(glute,glute2);
-        attachClickEventListeners(upper_abs,upper_abs);
-        attachClickEventListeners(calf,calf2);
-        attachClickEventListeners(lower_abs,lower_abs);
-        attachClickEventListeners(obliques,obliques2);
-        attachClickEventListeners(vastus_lateralis,vastus_lateralis2);
-        attachClickEventListeners(vastus_medialis,vastus_medialis2);
-        attachClickEventListeners(tibia,tibia2);
-        attachClickEventListeners(sartorius,sartorius2);
-        attachClickEventListeners(calf,calf2);
-        attachClickEventListeners(abductor,abductor2);
-        attachClickEventListeners(pec_major, pec_major2);
-        attachClickEventListeners(lat, lat2);
-        attachClickEventListeners(upper_pec,upper_pec2);
-        attachClickEventListeners( front_delt,front_delt2);
-        attachClickEventListeners(side_delt,side_delt2);
-        attachClickEventListeners(bicep,bicep2);
-        attachClickEventListeners(forearm,forearm2);
-        attachClickEventListeners(lateral_tricep,lateral_tricep2);
-        attachClickEventListeners(long_tricep,long_tricep2);
-        attachClickEventListeners(rear_delt,rear_delt2);
-        attachClickEventListeners(trap,trap2);
-        attachClickEventListeners(low_back,low_back);
-        attachClickEventListeners(upper_trap,upper_trap2);
-        attachClickEventListeners(teres_major,teres_major2);
-        attachClickEventListeners(Infraspinatus,Infraspinatus2);
-        attachClickEventListeners(rectus_femoris,rectus_femoris2);
-
- 
-
-
     </script>
 </body>
 </html>
-
-        
