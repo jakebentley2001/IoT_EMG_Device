@@ -14,23 +14,39 @@
 
         h1, p {text-align: center;}
 
-        .overlay-text {
+        .overlay-container {
             position: relative;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            text-align: center;
+            margin-top: 20px; /* Adjust top margin as needed */
+        }
+
+        .overlay-text {
             color: white;
             font-size: 40px;
             font-weight: bold;
-            text-align: center;
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px; /* Adjust padding as needed */
+            padding: 10px 20px;
             margin: 0; 
             box-sizing: border-box; /* Include padding and border in element's total width and height */
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
             display: inline-block;
         }
+
+        /* Style for the button */
+        .reselect-button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -39,7 +55,15 @@
     <!-- Put a div element with id "map" for the image container -->
     <div id="map"></div>
     <!-- See what the text is doing-->
-    <div class="overlay-text" id="overlayText">We want this to be invisible</div>
+
+    <!-- Container for overlay text and button -->
+    <div class="overlay-container">
+        <!-- See what the text is doing-->
+        <div class="overlay-text" id="overlayText">We want this to be invisible</div>
+        
+        <!-- Button for reselecting -->
+        <button class="reselect-button" id="reselectButton">Reselect</button>
+    </div>
     
     <!-- Include Leaflet JavaScript file -->
     <!-- Make sure you put this AFTER Leaflet's CSS -->
