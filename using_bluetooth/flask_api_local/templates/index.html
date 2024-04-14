@@ -4,50 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Image Overlay</title>
+
+
     <!-- Include Leaflet CSS file -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
          crossorigin=""/>
-    <style>
-        /* Define the height of the map container */
-        #map { height: 500px; width: 500px; margin: auto; position: relative;}
 
-        h1, p {text-align: center;}
+         <style>
+/* Map container */
+#map {
+    height: 500px;
+    width: 500px;
+    margin: auto;
+    position: relative;
+    border: 2px solid #ccc; /* Add a 2px solid border with light gray color */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    overflow: hidden; /* Hide overflow content (e.g., map markers) within the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow for depth */
+}
 
-        .overlay-container {
-            position: relative;
-            text-align: center;
-            margin-top: 20px; /* Adjust top margin as needed */
-        }
 
-        .overlay-text {
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            margin: 0; 
-            box-sizing: border-box; /* Include padding and border in element's total width and height */
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            display: inline-block;
-        }
+h1 {
+    text-align: center;
+    font-size: 36px; /* Increase font size for emphasis */
+    font-weight: bold; 
+    font-family: 'Arial', sans-serif;/* Add bold font weight for prominence */
+    color: #333; /* Darken text color for better readability */
+    margin-bottom: 10px; /* Add bottom margin for spacing */
+}
 
-        /* Style for the button */
-        .reselect-button {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            cursor: pointer;
-        }
+p {
+    text-align: center;
+    font-size: 18px; /* Increase font size for better readability */
+    color: #666; /* Slightly darken text color for contrast */
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px; /* Add bottom margin for spacing */
+}
 
-    </style>
+/* Overlay container */
+.overlay-container {
+    position: relative;
+    text-align: center;
+    margin-top: 20px; /* Adjust top margin as needed */
+}
+
+/* Overlay text */
+.overlay-text {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 1);
+    padding: 20px; /* Increase padding for better aesthetics */
+    margin: 0; 
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: inline-block;
+    border-radius: 10px; /* Add border radius for rounded corners */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+}
+
+/* Button */
+.reselect-button {
+    display: block;
+    margin: 20px auto; /* Increase margin for better spacing */
+    padding: 15px 30px; /* Increase padding for larger button */
+    font-size: 18px; /* Increase font size for better readability */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    cursor: pointer;
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add box shadow for depth */
+}
+
+/* Button hover effect */
+.reselect-button:hover {
+    background-color: #0056b3; /* Darken background color on hover */
+}
+        </style> 
+
+    
 </head>
 <body>
     <h1>Choose a Muscle!</h1>

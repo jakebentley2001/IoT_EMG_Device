@@ -1,0 +1,37 @@
+/* Define the height of the map container */
+            #map { height: 500px; width: 500px; margin: auto; position: relative;}
+    
+            h1, p {text-align: center;}
+    
+            .overlay-container {
+                position: relative;
+                text-align: center;
+                margin-top: 20px; /* Adjust top margin as needed */
+            }
+    
+            .overlay-text {
+                color: white;
+                font-size: 40px;
+                font-weight: bold;
+                background-color: rgba(0, 0, 0, 0.5);
+                padding: 10px 20px;
+                margin: 0; 
+                box-sizing: border-box; /* Include padding and border in element's total width and height */
+                opacity: 0;
+                transition: opacity 0.8s ease;
+                display: inline-block;
+            }
+    
+            /* Style for the button */
+            .reselect-button {
+                display: block;
+                margin: 10px auto;
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                opacity: 0;
+                transition: opacity 0.8s ease;
+                cursor: pointer;
+            }
