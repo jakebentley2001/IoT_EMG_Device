@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 from pymongo import MongoClient
+from python_script import run_python_script
 
 
 app = Flask(__name__ )
@@ -31,13 +32,23 @@ def get_recording():
     else:
         return jsonify({"error": "Missing record_number parameter"}), 400
     
-    
+
 @app.route('/save-coordinates', methods=['POST'])
 def save_coordinates():
     data = request.json
     formatted_coordinates = [[round(point['lat'], 4), round(point['lng'], 4)] for point in data]
     print('Received coordinates:', formatted_coordinates)
     return 'Coordinates received successfully.'
+
+@app.route('/rundemo', methods=['POST'])
+def run_demo():
+    # Code to execute your Python script
+    # For example:
+    print("Python script is attempting to run")
+    result = run_python_script()
+
+    # Optionally, send a response back to the client
+    return {'result': result}
 
 if __name__ == "__main__":
     app.run(debug=True)

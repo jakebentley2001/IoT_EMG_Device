@@ -22,6 +22,7 @@
     border-radius: 10px; /* Add border radius for rounded corners */
     overflow: hidden; /* Hide overflow content (e.g., map markers) within the border */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow for depth */
+    background-color: white;
 }
 
 
@@ -49,28 +50,24 @@ p {
     margin-top: 20px; /* Adjust top margin as needed */
 }
 
-/* Overlay text */
 .overlay-text {
     color: white;
     font-size: 40px;
     font-weight: bold;
-    background-color: rgba(0, 0, 0, 1);
-    padding: 20px; /* Increase padding for better aesthetics */
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
     margin: 0; 
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     opacity: 0;
     transition: opacity 0.8s ease;
     display: inline-block;
-    border-radius: 10px; /* Add border radius for rounded corners */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
 }
 
-/* Button */
 .reselect-button {
     display: block;
-    margin: 20px auto; /* Increase margin for better spacing */
-    padding: 15px 30px; /* Increase padding for larger button */
-    font-size: 18px; /* Increase font size for better readability */
+    margin: 10px auto; /* Increase margin for better spacing */
+    padding: 5px 10px; /* Increase padding for larger button */
+    font-size: 10px; /* Increase font size for better readability */
     background-color: #007bff;
     color: white;
     border: none;
@@ -81,10 +78,21 @@ p {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add box shadow for depth */
 }
 
-/* Button hover effect */
-.reselect-button:hover {
-    background-color: #0056b3; /* Darken background color on hover */
+.runScriptButton {
+    display: block;
+    margin: 20px auto; /* Increase margin for better spacing */
+    padding: 15px 30px; /* Increase padding for larger button */
+    font-size: 18px; /* Increase font size for better readability */
+    background-color: green;
+    color: white;
+    border: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    cursor: pointer;
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add box shadow for depth */
 }
+
         </style> 
 
     
@@ -103,7 +111,14 @@ p {
         
         <!-- Button for reselecting -->
         <button class="reselect-button" id="reselectButton">Reselect</button>
+
+        <button class="runScriptButton" id="runScriptButton">Run Python Script</button>
+
+       <!-- <button id="runScriptButton">Run Python Script</button>-->
+
     </div>
+
+    
     
     <!-- Include Leaflet JavaScript file -->
     <!-- Make sure you put this AFTER Leaflet's CSS -->

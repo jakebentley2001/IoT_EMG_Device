@@ -120,6 +120,8 @@ var imageOverlay = L.imageOverlay("static/muscles.png", bounds, { interactive: t
  // Get the overlay text element
 var overlayText = document.querySelector(".overlay-text");
 var reselectButton = document.getElementById("reselectButton");
+var runScriptButton = document.getElementById("runScriptButton");
+
 
 var polygonsInteractive = true;
 
@@ -261,6 +263,7 @@ function makeImageOverlayTransparent(muscleName) {
     overlayText.style.opacity = 1; 
 
     reselectButton.style.opacity = 1; 
+    runScriptButton.style.opacity = 1; 
      
 
     polygonsInteractive = false;
@@ -291,6 +294,7 @@ reselectButton.addEventListener("click", function() {
 
     overlayText.style.opacity = 0;
     reselectButton.style.opacity = 0;
+    runScriptButton.style.opacity = 0; 
     imageOverlay.setOpacity(1);
 
     makePolygonsTransparent(polygons);
@@ -359,4 +363,24 @@ reselectButton.addEventListener("click", function() {
     attachClickEventListeners(rectus_femoris,rectus_femoris2);
 
     addClickListener(polygonsWithMuscleNames)
+});
+
+
+document.getElementById('runScriptButton').addEventListener('click', function() {
+    fetch('/rundemo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Result:', data.result);
+        // Handle response from the server as needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors
+    });
 });
