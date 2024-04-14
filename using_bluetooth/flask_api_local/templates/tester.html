@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Image Overlay</title>
+    <!-- Include Leaflet CSS file -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+         crossorigin=""/>
+    <style>
+        /* Define the height of the map container */
+        #map { height: 500px; width: 500px; margin: auto; position: relative;}
+
+        h1, p {text-align: center;}
+    </style>
+</head>
+<body>
+    <h1>Choose a Muscle!</h1>
+    <p>Select which muscle you would like to monitor during your workout</p>
+    <!-- Put a div element with id "map" for the image container -->
+    <div id="map"></div>
+    
+    <!-- Include Leaflet JavaScript file -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+         crossorigin=""></script>
+
+    <script>
+        // Initialize the map
+        var map = L.map('map');
+
+        // Set the bounds of the image (change the coordinates accordingly)
+        var bounds = [[0, 0], [500, 200]];
+        
+        var pec_major = L.polygon([[79.6556, 36.7382],[80.1336, 42.1875],[80.2235, 50.1855],[78.3671, 50.8007],[77.9707, 47.1972],[78.2782, 38.9355],[79.08846, 37.7050]]).addTo(map);
+     
+        var pec_major2 = L.polygon([[80.1787, 54.1406], [78.3494, 53.4375], [77.8418, 58.1836], [78.1526, 65.5664], [78.3849, 66.9727], [79.5923, 68.0273], [80.0884, 62.4023], [80.2236, 55.2832], [80.1937, 54.2285]]).addTo(map);
+     
+
+        var lat = L.polygon([[78.8361, 132.0117], [78.87, 139.834],[78.2424, 142.1191], [77.6177, 145.2832], [75.431, 145.0195],[72.6858, 143.1738], [73.3279, 139.4824], [74.8679, 135.6152],[76.6189, 134.5605], [78.0073, 132.627]]).addTo(map);  
+     
+        var lat2 = L.polygon([[72.7119, 151.084], [73.4284, 154.8633],[74.7989, 158.7305], [76.0161, 158.9063], [77.4469, 161.1914],[78.3671, 162.2461], [78.7849, 162.4219], [78.802, 157.4121],[78.8361, 154.248], [78.2782, 151.7871], [77.7862, 149.3262],[77.118, 148.623], [75.7156, 149.1504], [74.3785, 149.8535],[72.9712, 150.6445]]).addTo(map);
+
+        var upper_pec = L.polygon([[79.6872, 36.6943], [80.111, 42.0996],[80.231, 49.9658], [80.4741, 48.999], [80.7394, 43.7256],[80.6969, 41.1328], [80.3864, 38.3203], [80.0277, 36.4307],[79.7656, 36.167]]).addTo(map);
+        
+        var upper_pec2 = L.polygon([[80.2683, 54.2285], [80.1186, 61.6992], [80.0124, 63.8965], [79.6399, 68.291], [80.2087, 67.5879], [80.6327, 64.1602], [80.7747, 61.3477], [80.5897, 57.5684], [80.3717, 54.7559]]).addTo(map);
+
+        var front_delt = L.polygon([[78.6387, 31.0254], [79.2125, 34.7607],[79.5765, 36.123], [80.02, 36.7383], [80.3717, 38.584],[80.5825, 40.5615], [80.704, 42.4512], [80.8169, 40.5176],[80.8239, 37.3975], [80.6327, 35.0684], [80.3275, 33.1348],[79.7967, 31.5527], [79.1796, 30.9375], [78.5692, 30.8496]]).addTo(map);
+        
+        var front_delt2 = L.polygon([[80.7958, 61.4355], [80.5537, 64.9951], [80.2012, 67.3682], [79.7343, 68.5107], [79.3596, 68.8623], [78.5779, 73.5645], [79.2781, 73.3008], [79.9742, 72.4219], [80.5969, 69.7412], [80.7958, 67.4121], [80.8519, 63.1494]]).addTo(map);
+
+        var side_delt = L.polygon([[78.2155, 29.707], [78.6905, 31.2012],[79.4726, 31.333], [79.8666, 31.9043], [80.2831, 33.2227],[80.5897, 35.1123], [80.8239, 37.1777], [80.7677, 33.3984],[80.5031, 31.2012], [80.111, 29.8828], [79.5286, 29.5313],[78.9798, 29.4873], [78.3405, 29.4873]]).addTo(map);
+        
+        var side_delt2 = L.polygon([[80.8099, 67.9395], [80.2831, 71.2354], [79.7186, 73.0371], [78.8361, 73.3447], [78.1345, 74.5752], [78.9966, 75.0146], [79.8123, 75.0586], [80.3644, 73.8721], [80.647, 71.8066], [80.8868, 68.4668]]).addTo(map);
+
+        var bicep = L.polygon([[75.5521, 27.5977], [75.6068, 29.0039],[76.3311, 31.7725], [77.118, 34.4971], [77.9982, 36.123],[78.6127, 37.0898], [78.963, 37.4414], [79.5765, 36.6504],[79.695, 36.2549], [79.3271, 35.2441], [78.963, 32.959],[78.5605, 30.8496], [78.1616, 29.5752], [77.6271, 28.6084],[77.069, 27.8613], [76.4655, 27.3779], [75.9416, 26.8506],[75.6177, 27.334]]).addTo(map);
+        
+        var bicep2 = L.polygon([[79.5765, 67.8516], [78.9798, 66.8408], [77.9707, 68.2031], [77.3991, 69.3018], [76.8007, 71.2354], [75.8021, 74.6631], [75.5082, 76.377], [75.6068, 77.2998], [76.0902, 77.5635], [77.1669, 76.4648], [77.8603, 75.5859], [78.656, 73.1689], [79.0384, 70.5762], [79.6714, 68.1152]]).addTo(map);
+
+        var forearm = L.polygon([[69.9303, 17.4902],[71.8014, 21.709], [73.2774, 24.4336], [74.3074, 26.8066],[75.1408, 29.7949], [75.6286, 30.8496], [75.9736, 30.7617],[75.4972, 28.4766], [75.5411, 27.5977], [75.9948, 27.0703],[75.32, 23.0273], [74.4494, 21.709], [73.2267, 20.4785],[72.0468, 19.5117], [70.5542, 17.0508], [69.9001, 15.6445]]).addTo(map);
+        
+        var forearm2 = L.polygon([[75.7156, 74.0039], [75.2082, 74.2676], [74.2836, 78.0469], [73.1504, 80.5957], [71.8288, 82.7051], [70.7, 84.8145], [69.5959, 87.0996], [70.1105, 88.5059], [71.7739, 85.4297], [73.6525, 83.6719], [75.1408, 81.7383], [75.5849, 80.332], [75.9948, 77.8711], [75.6286, 77.168], [75.6286, 75.8496], [75.8666, 74.2676]]).addTo(map);
+
+        var lateral_tricep = L.polygon([[74.5433, 123.0469],[76.0373, 124.0137], [76.9007, 125.5078], [77.7489, 126.8262],[78.3139, 128.3203], [78.7678, 130.3418], [79.2043, 131.3965],[79.8123, 130.6055], [80.0124, 130.5176], [79.6241, 128.3203],[79.0718, 127.5293], [78.6127, 126.0352], [78.1706, 123.8379],[77.7862, 122.168], [77.0394, 121.2012], [76.4758, 120.9375], [75.9095, 120.8496], [75.2307, 121.5527], [74.5199, 122.3438]]).addTo(map);
+
+        var lateral_tricep2 = L.polygon([[79.6557, 163.2129],[78.9882, 163.4766], [78.4202, 165.1465], [77.8788, 167.3438],[77.1962, 168.2227], [76.4758, 169.3652], [75.0277, 170.6836],[74.3785, 171.6504], [75.6068, 172.793], [76.3933, 173.4082],[77.2739, 172.8809], [77.8788, 171.2988], [78.4554, 168.8379],[79.0718, 166.8164], [79.7029, 165.5859], [79.9359, 164.0918]]).addTo(map);
+
+        var long_tricep = L.polygon([[75.4199, 123.9697], [76.0373, 126.7822],[76.5373, 128.8477], [77.1376, 129.9023], [77.6835, 130.3857],[78.4906, 130.2979], [78.8531, 130.0781], [78.4378, 128.2764],[78.1435, 127.1777], [77.6365, 126.2988], [77.0886, 125.8154],[76.5373, 124.3652], [76.0161, 123.8818], [75.5411, 123.6182]]).addTo(map);
+
+        var long_tricep2 = L.polygon([[78.802, 163.916], [77.989, 163.8281], [77.2932, 164.0039], [76.3311, 165.3223], [75.8452, 168.2227], [75.3645, 170.5078], [76.2687, 170.0684], [77.0197, 168.3105], [77.7116, 167.6953], [78.3139, 165.8496], [78.7678, 164.0039]]).addTo(map);
+
+        var rear_delt = L.polygon([[79.1796, 124.0576], [79.3758, 126.3867],[79.7108, 128.7158], [79.9742, 130.3418], [80.4376, 131.3965],[80.8589, 135.7471], [81.0728, 135.4834], [81.2617, 132.2314],[81.1677, 128.54], [80.9423, 125.6396], [80.5104, 123.75],[80.0884, 123.5742], [79.2043, 123.9697]]).addTo(map);
+
+        var rear_delt2 = L.polygon([[80.9146, 157.9395],[80.4303, 161.543], [80.2087, 163.3887], [79.7343, 165.4102],[79.2372, 168.4863], [78.9714, 170.6836], [79.7499, 170.1562],[80.2385, 170.5957], [80.7747, 169.2773], [81.0523, 166.9922],[81.2149, 162.9492], [81.2014, 160.1367], [81.0386, 158.5547]]).addTo(map);
+
+        var trap = L.polygon([[81.255, 131.9238], [81.1068, 134.6484],[80.8169, 136.4063], [80.4595, 137.1973], [79.6714, 138.3398],[79.0384, 139.4824], [78.4554, 141.5918], [77.8973, 143.9648],[77.4851, 145.8984], [77.466, 146.6016], [78.543, 145.9863],[79.5446, 145.9863], [80.2831, 145.6348], [80.9699, 145.459],[81.2417, 143.7012], [81.4008, 141.1523], [81.4532, 137.1973],[81.4139, 134.5605], [81.3481, 132.0117]]).addTo(map);
+
+        var trap2 = L.polygon([[77.5988, 148.7109], [78.3494, 152.4023],[79.0384, 154.5117], [79.7812, 156.0938], [80.4303, 156.9727],[80.9837, 158.7305], [81.2417, 163.0371], [81.3745, 157.6758],[81.4008, 153.1934], [81.2684, 150.3809], [80.9975, 148.623],[80.1787, 148.5352], [79.3352, 148.623], [78.4554, 148.5352],[77.9707, 148.3594]]).addTo(map);
+
+        var low_back = L.polygon([[77.3703, 145.1074], [76.3519, 145.1953], [75.1182, 144.668], [73.9468, 144.0527], [72.8938, 143.3496],[71.8014, 143.5254], [70.9883, 145.8984], [70.8735, 147.2168],[71.3008, 149.502], [71.7739, 150.9961], [72.5545, 151.1719],[73.5035, 150.2051], [74.6367, 149.5898], [75.9095, 149.1504],[76.7202, 148.9746], [77.118, 148.8867], [77.5041, 148.7988],[77.3895, 147.1289]]).addTo(map);
+
+        var upper_trap = L.polygon([[81.4008, 134.6484], [81.427, 138.7793],[81.3083, 142.8223], [81.1339, 145.459], [81.57, 144.7559],[81.9601, 145.1074], [82.4833, 145.2832], [82.7098, 145.1953],[82.7985, 143.7012], [82.414, 143.0859], [82.0457, 141.416],[81.6978, 138.6914], [81.4663, 136.0547]]).addTo(map);
+
+        var upper_trap2 = L.polygon([[81.9046, 149.3701], [81.4597, 149.5898],[81.1068, 148.8867], [81.4074, 152.71], [81.4139, 158.1152],[81.6214, 156.3574], [81.8674, 153.8086], [82.238, 151.3916],[82.8315, 151.1719], [82.7488, 149.0186], [82.5177, 148.4912]]).addTo(map);
+
+        var teres_major = L.polygon([[80.0429, 130.957], [79.4485, 130.8691],[78.887, 131.3965], [78.7678, 134.5605], [78.7678, 138.6914],[78.819, 140.7129], [79.27, 139.2188], [79.5286, 135.5273],[79.9513, 132.8027], [80.2979, 131.0449]]).addTo(map);
+
+        var teres_major2 = L.polygon([[79.2781, 154.6875],[78.87, 153.9844], [78.819, 159.873], [78.8531, 162.2021],[79.2454, 163.3447], [79.8045, 163.4326], [80.3275, 163.2129],[80.2831, 162.334], [79.9205, 160.708], [79.5286, 158.3789],[79.3515, 156.7529]]).addTo(map);
+
+        var Infraspinatus = L.polygon([[80.3423, 131.1328],[79.8433, 133.3301], [79.4162, 135.791], [79.2372, 139.043],[79.7029, 138.9551], [80.2831, 137.7246], [80.7747, 136.6699],[80.9007, 135.5273], [80.5897, 133.418], [80.3423, 131.3086]]).addTo(map);
+
+        var Infraspinatus2 = L.polygon([[79.2863, 154.9512],[79.4162, 158.6426], [79.8123, 160.9277], [80.2979, 163.3008],[80.6041, 160.2246], [80.8868, 158.291], [80.4157, 156.6211],[79.9359, 155.918], [79.3677, 155.0391]]).addTo(map);
+
+        var rectus_femoris = L.polygon([[70.9883, 38.1445], [69.8093, 37.002], [68.2368, 36.4746], [66.2669, 36.0352], [61.3546, 37.4414], [56.849, 38.9355], [57.1362, 41.1328], [61.939, 43.7695], [64.2828, 43.418], [66.6181, 42.2754], [68.6885, 40.8691], [70.0806, 39.375], [71.3851, 38.6719]]).addTo(map);
+
+        var rectus_femoris2 = L.polygon([[71.017, 65.3906], [68.7204, 63.8086], [66.0537, 61.6992], [63.2336, 60.7324], [57.3739, 63.1055], [56.5595, 65.2148], [60.2398, 66.7969], [66.5832, 68.291], [68.0076, 68.4668], [69.6265, 67.6758], [70.9597, 66.7969], [71.3851, 65.918]]).addTo(map);
+
+        var vastus_lateralis = L.polygon([[67.9746, 36.0352], [65.4034, 34.8926], [63.194, 34.4531], [59.5343, 34.7168], [56.9929, 35.2441], [54.2652, 34.4531], [54.1624, 36.6504], [55.9738, 38.3203], [57.9382, 38.8477], [60.9304, 37.7051], [63.976, 36.9141], [65.6945, 36.5625], [67.17, 36.0352]]).addTo(map);
+
+        var vastus_lateralis2 = L.polygon([[67.9746, 68.2031], [66.125, 68.2031], [62.145, 67.1484], [58.1243, 65.8301], [54.7753, 66.9727], [54.0078, 69.6973], [55.1286, 70.0488], [58.0314, 69.4336], [61.3125, 69.873], [64.5106, 69.9609], [66.6181, 69.082]]).addTo(map);
+
+        var vastus_medialis = L.polygon([[53.1731, 44.0332], [55.4789, 40.5176], [58.4937, 41.6602], [61.7731, 43.418], [59.0406, 44.209], [56.1211, 44.3848], [54.1624, 44.7363]]).addTo(map);
+
+        var vastus_medialis2 = L.polygon([[61.9803, 60.8203], [58.2633, 60.1172], [55.1286, 59.8535], [52.8559, 60.6445], [54.5721, 63.457], [56.9929, 63.3691], [59.2209, 62.2266], [61.0157, 61.7871]]).addTo(map);
+
+        var tibia = L.polygon([[26.6671, 33.2227], [29.9169, 35.332], [34.7416, 35.5957], [40.313, 35.5078], [46.0122, 35.7715], [49.3251, 35.8594], [50.4015, 34.6289], [47.5172, 32.3438], [43.644, 30.8496], [40.714, 31.8164], [36.5979, 33.2227], [31.7282, 33.0469], [28.3817, 32.6074]]).addTo(map);
+
+        var tibia2 = L.polygon([[50.1206, 69.2578], [45.5217, 68.4668], [39.096, 69.1699], [32.6949, 69.082], [27.2156, 70.1367], [26.5099, 71.7188], [30.1451, 71.7188], [35.4607, 71.1035], [38.5482, 71.7188], [41.5744, 73.125], [44.2137, 73.5645], [46.7399, 73.3008], [48.5166, 71.3672], [50.2332, 70.2246]]).addTo(map);
+
+        var sartorius = L.polygon([[70.8735, 38.7598], [68.5604, 40.4297], [64.9235, 42.8906], [61.228, 44.0332], [53.5925, 44.3848], [57.8915, 46.9336], [60.9731, 47.5488], [63.9374, 46.582], [66.3728, 44.9121], [68.3668, 43.3301], [70.3483, 42.0996], [70.8447, 40.7813]]).addTo(map);
+
+        var sartorius2 = L.polygon([[54.7753, 60.293], [62.2679, 60.8203], [65.9465, 61.875], [68.1389, 63.5449], [71.4412, 65.8301], [70.4368, 62.7539], [68.4315, 61.084], [66.4431, 59.7656], [63.7825, 58.1836], [60.2834, 57.1289], [56.8009, 58.1836], [55.0784, 58.8867]]).addTo(map);
+        
+        var calf = L.polygon([[32.6209, 128.9355], [35.2456, 131.9238], [29.7644, 135.7031], [37.8575, 139.6582], [44.1507, 138.9551], [47.7541, 139.3945], [50.0642, 138.0762], [48.1661, 134.6484], [51.7814, 132.9785], [51.1242, 131.3965], [48.5748, 130.957], [44.2137, 129.0234], [40.313, 127.5293], [32.9165, 128.7598]]).addTo(map);
+
+        var calf2 = L.polygon([[47.8132, 154.9512], [43.8979, 155.6543], [39.4362, 154.5996], [36.4566, 154.5117], [29.6881, 158.9063], [34.8138, 161.9824], [32.6209, 164.9707], [39.0277, 166.2012], [43.7076, 165.8496], [46.7399, 164.0918], [49.4967, 162.7734], [51.5087, 162.6855], [51.9984, 160.752], [48.691, 159.082], [50.1206, 156.4453], [48.8647, 155.0391]]).addTo(map);
+
+        var abductor = L.polygon([[61.228, 47.4609], [64.1298, 45.8789], [66.018, 44.7363], [67.6761, 46.582], [66.4431, 49.043], [66.0894, 51.1523], [65.9823, 54.4922], [67.3399, 57.6563], [66.125, 59.5898], [60.7162, 56.7773], [63.3127, 54.7559], [65.0721, 54.3164], [65.1461, 50.7129], [63.1146, 50.2734], [60.8021, 48.252], [60.8449, 47.0215]]).addTo(map);
+
+        var abductor2 = L.polygon([[57.3265, 142.3828], [61.0157, 140.9766], [62.9152, 140.0977], [64.6991, 140.3613], [65.6945, 144.7559], [66.8611, 146.0742], [66.8611, 147.9199], [65.2935, 150.293], [64.9608, 153.8086], [62.7949, 153.7207], [57.5158, 151.7871], [60.587, 148.5352], [62.8351, 148.0957], [65.0721, 148.0078], [65.1461, 146.1621], [61.939, 145.8984], [59.4451, 144.4922], [57.8915, 142.7344]]).addTo(map);
+
+        var outer_hamstring = L.polygon([[51.5087, 131.3965], [56.0229, 131.3965], [58.2633, 131.9238], [61.3546, 133.0664], [64.053, 132.8906], [64.8863, 137.8125], [64.3969, 138.5156], [62.3496, 137.1973], [57.3265, 136.0547], [54.9776, 135.0879], [52.6964, 133.0664], [51.1242, 131.4844]]).addTo(map);
+
+        var outer_hamstring2 = L.polygon([[64.5862, 155.5664], [61.6482, 157.1484], [56.945, 157.7637], [55.5286, 158.2031], [51.3992, 162.5977], [55.7766, 162.6855], [58.8137, 161.9824], [61.3125, 160.752], [63.976, 160.752], [64.5862, 159.2578], [64.8863, 156.3574]]).addTo(map);
+
+        var inner_hamstring = L.polygon([[64.7741, 138.3398], [61.4808, 136.4941], [56.6562, 136.2305], [53.9043, 136.7578], [48.9225, 139.2188], [54.1109, 140.0977], [58.0314, 141.5918], [59.933, 141.8555], [62.4311, 140.7129], [64.7366, 140.2734]]).addTo(map);
+
+        var inner_hamstring2 = L.polygon([[64.6991, 153.5449], [62.5123, 153.5449], [58.2633, 151.6992], [54.9271, 153.6328], [50.1206, 155.2148], [54.7246, 157.5879], [56.7045, 158.2031], [60.5438, 157.1484], [63.4701, 156.2695], [64.8489, 155.3906]]).addTo(map);
+
+        var glute = L.polygon([[68.9742, 131.9238], [65.9106, 132.5391], [64.3209, 133.0664], [65.0351, 137.0215], [65.0721, 142.998], [66.1605, 146.0742], [67.204, 146.6895], [68.2694, 145.9863], [70.1105, 143.7891], [71.636, 143.5254], [70.9597, 140.0098], [70.3779, 136.6699], [69.5345, 133.5059]]).addTo(map);
+
+        var glute2 = L.polygon([[71.5666, 150.3809], [69.9905, 150.3369], [68.4799, 148.5791], [67.626, 147.6123], [65.9644, 148.3594], [65.1646, 151.3477], [64.9794, 155.1709], [64.9049, 158.4668], [64.4538, 160.752], [66.7399, 161.543], [69.1782, 161.543], [70.3335, 157.8516], [71.0883, 153.5449], [71.5666, 151.3477]]).addTo(map);
+
+        var upper_abs = L.polygon([[77.9707, 50.0098], [77.5041, 46.1426], [76.7, 45.1758], [75.5849, 45.3516], [74.9137, 45.5273], [75.0049, 50.4492], [74.8449, 51.3281], [74.8449, 52.9102], [75.0504, 55.0195], [74.9137, 58.9746], [76.3933, 59.1504], [77.3318, 58.7988], [77.8233, 56.6016], [77.9341, 53.6133], [77.7862, 52.998], [77.7489, 51.6797], [77.9341, 50.9766]]).addTo(map);
+        
+        var lower_abs = L.polygon([[74.9366, 45.8789], [74.3548, 44.6484], [73.7512, 45.1758], [72.5545, 44.9121], [70.1404, 46.7578], [68.911, 47.9004], [67.5422, 50.0977], [67.5757, 54.3164], [69.6265, 57.3047], [71.2444, 58.9746], [72.3957, 59.9414], [73.0994, 58.7988], [73.6773, 59.3262], [74.5433, 59.3262], [75.073, 56.4258], [75.0277, 53.7891], [74.9137, 53.0859], [74.9366, 50.8887]]).addTo(map);
+        
+        var obliques = L.polygon([[71.017, 40.5176], [71.4412, 45.2637], [72.7119, 44.8242], [73.4535, 42.9785], [73.8003, 44.2969], [74.6134, 43.9453], [75.6939, 43.9453], [76.5985, 43.5059], [77.4087, 44.209], [76.9999, 41.0449], [76.5782, 39.375], [76.0373, 39.1992], [74.4022, 39.9902], [73.8493, 39.5508], [73.0738, 38.7598], [71.0741, 39.1992], [71.1594, 42.2754]]).addTo(map);
+
+        var obliques2 = L.polygon([[71.636, 59.502], [71.3008, 65.0391], [73.5035, 65.6543], [74.3074, 65.0391], [75.3867, 64.8633], [76.4346, 65.3906], [77.1376, 62.7539], [77.4278, 60.6445], [77.3511, 60.3809], [76.5168, 61.084], [75.8452, 60.7324], [74.8908, 60.7324], [74.2359, 60.4688], [73.8737, 60.0293], [73.252, 60.7324], [72.3158, 59.7656], [71.4412, 59.7656], [71.329, 61.4355]]).addTo(map);
+        
+        // Add your own image overlay
+        L.imageOverlay("{{url_for('static', filename='muscles.png')}}", bounds).addTo(map);
+
+        // Set the view to the bounds of the image
+        map.fitBounds(bounds);
+
+        map.zoomIn();
+
+        var polygons = [pec_major, pec_major2, lat, lat2, upper_pec,upper_pec2,front_delt,front_delt2,side_delt,side_delt2,bicep,bicep2,forearm,forearm2,lateral_tricep,lateral_tricep2,long_tricep,long_tricep2,rear_delt,rear_delt2,trap,trap2,low_back,upper_trap,upper_trap2,teres_major,teres_major2,Infraspinatus,Infraspinatus2,rectus_femoris,rectus_femoris2,vastus_lateralis,vastus_lateralis2,vastus_medialis,vastus_medialis2,tibia,tibia2,sartorius,sartorius2,calf,calf2,abductor,abductor2,outer_hamstring,outer_hamstring2,inner_hamstring,inner_hamstring2,glute,glute2,upper_abs,lower_abs,obliques,obliques2];
+
+
+        function makePolygonsTransparent(polygons) {
+            polygons.forEach(function(polygon) {
+                polygon.setStyle({fillOpacity: 0});
+            });
+        }
+
+        function makePolygonsOutlineTransparent(polygons) {
+            polygons.forEach(function(polygon) {
+                polygon.setStyle({opacity: 0});
+            });
+        }
+
+                // Function to handle mouse events for specific polygons
+        function handleMouseEvents(poly, poly2, e) {
+            poly.setStyle({opacity: e.type === 'mouseover' ? 1 : 0});
+            poly2.setStyle({opacity: e.type === 'mouseover' ? 1 : 0});
+        }
+
+        // Function to attach event listeners to polygons
+        function attachEventListeners(poly, poly2) {
+            poly.on('mouseover', function(e) {
+                handleMouseEvents(poly, poly2, e); 
+            });
+            poly2.on('mouseover', function(e) {
+                handleMouseEvents(poly, poly2, e); 
+            });
+            poly.on('mouseout', function(e) {
+                handleMouseEvents(poly, poly2, e);
+            });
+            poly2.on('mouseout', function(e) {
+                handleMouseEvents(poly, poly2, e);
+            });
+        }
+
+        function handleMouseClick(poly, poly2) {
+            poly.setStyle({fillOpacity: 0.5});
+            poly2.setStyle({fillOpacity: 0.5});
+        }
+        
+        // Function to attach click event listeners to polygons
+        function attachClickEventListeners(poly, poly2) {
+            poly.on('click', function() {
+                handleMouseClick(poly, poly2);
+            });
+            poly2.on('click', function() {
+                handleMouseClick(poly, poly2);
+            });
+        }
+
+       // makePolygonsTransparent(polygons);
+       // makePolygonsOutlineTransparent(polygons);
+        // Attach event listeners for pec_major polygons
+        //attachEventListeners(outer_hamstring,outer_hamstring2);
+        //attachEventListeners(inner_hamstring,inner_hamstring2);
+ 
+
+
+        //attachClickEventListeners(outer_hamstring,outer_hamstring2);
+        //attachClickEventListeners(inner_hamstring,inner_hamstring2);
+
+
+
+        makePolygonsTransparent(polygons);
+        makePolygonsOutlineTransparent(polygons);
+// Attach event listeners for pec_major polygons
+        attachEventListeners(outer_hamstring,outer_hamstring2);
+        attachEventListeners(inner_hamstring,inner_hamstring2);
+        attachEventListeners(glute,glute2);
+        attachEventListeners(upper_abs,upper_abs);
+        attachEventListeners(calf,calf2);
+        attachEventListeners(lower_abs,lower_abs);
+        attachEventListeners(obliques,obliques2);
+        attachEventListeners(vastus_lateralis,vastus_lateralis2);
+        attachEventListeners(vastus_medialis,vastus_medialis2);
+        attachEventListeners(tibia,tibia2);
+        attachEventListeners(sartorius,sartorius2);
+        attachEventListeners(calf,calf2);
+        attachEventListeners(abductor,abductor2);
+        attachEventListeners(pec_major, pec_major2);
+        attachEventListeners(lat, lat2);
+        attachEventListeners(upper_pec,upper_pec2);
+        attachEventListeners( front_delt,front_delt2);
+        attachEventListeners(side_delt,side_delt2);
+        attachEventListeners(bicep,bicep2);
+        attachEventListeners(forearm,forearm2);
+        attachEventListeners(lateral_tricep,lateral_tricep2);
+        attachEventListeners(long_tricep,long_tricep2);
+        attachEventListeners(rear_delt,rear_delt2);
+        attachEventListeners(trap,trap2);
+        attachEventListeners(low_back,low_back);
+        attachEventListeners(upper_trap,upper_trap2);
+        attachEventListeners(teres_major,teres_major2);
+        attachEventListeners(Infraspinatus,Infraspinatus2);
+        attachEventListeners(rectus_femoris,rectus_femoris2);
+
+
+        attachClickEventListeners(outer_hamstring,outer_hamstring2);
+        attachClickEventListeners(inner_hamstring,inner_hamstring2);
+        attachClickEventListeners(glute,glute2);
+        attachClickEventListeners(upper_abs,upper_abs);
+        attachClickEventListeners(calf,calf2);
+        attachClickEventListeners(lower_abs,lower_abs);
+        attachClickEventListeners(obliques,obliques2);
+        attachClickEventListeners(vastus_lateralis,vastus_lateralis2);
+        attachClickEventListeners(vastus_medialis,vastus_medialis2);
+        attachClickEventListeners(tibia,tibia2);
+        attachClickEventListeners(sartorius,sartorius2);
+        attachClickEventListeners(calf,calf2);
+        attachClickEventListeners(abductor,abductor2);
+        attachClickEventListeners(pec_major, pec_major2);
+        attachClickEventListeners(lat, lat2);
+        attachClickEventListeners(upper_pec,upper_pec2);
+        attachClickEventListeners( front_delt,front_delt2);
+        attachClickEventListeners(side_delt,side_delt2);
+        attachClickEventListeners(bicep,bicep2);
+        attachClickEventListeners(forearm,forearm2);
+        attachClickEventListeners(lateral_tricep,lateral_tricep2);
+        attachClickEventListeners(long_tricep,long_tricep2);
+        attachClickEventListeners(rear_delt,rear_delt2);
+        attachClickEventListeners(trap,trap2);
+        attachClickEventListeners(low_back,low_back);
+        attachClickEventListeners(upper_trap,upper_trap2);
+        attachClickEventListeners(teres_major,teres_major2);
+        attachClickEventListeners(Infraspinatus,Infraspinatus2);
+        attachClickEventListeners(rectus_femoris,rectus_femoris2);
+
+ 
+
+
+    </script>
+</body>
+</html>
+
+        
