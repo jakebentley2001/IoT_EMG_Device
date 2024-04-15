@@ -12,7 +12,7 @@ def run_python_script():
     client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
     db = client['IOT_DEVICE']
     collection = db['muscle_data']
-    record = "34"
+    record = "35"
     #muscle = muscle
     
 

@@ -29,7 +29,7 @@
         });
 
         function fetchRecord() {
-            const recordNumber = 34;
+            const recordNumber = 35;
 
             document.getElementById('myChart').scrollIntoView({ behavior: 'smooth' });
 

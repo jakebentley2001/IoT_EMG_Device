@@ -19,6 +19,15 @@ def index():
 @app.route('/get_recording', methods=['GET'])
 def get_recording():
     record_number = request.args.get('record_number')
+    
+    # document = collection.find().sort([('createdAt', -1)]).limit(1)
+    
+    # if document:
+    #     sensor_data = document['data'][1]
+    #     time_data = document['data'][0]
+    #     return jsonify({"record_number": 12, "data": sensor_data})
+    # else:
+    #     return jsonify({"error": "Record not found"}), 404
 
     if record_number:
         try:
