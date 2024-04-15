@@ -132,6 +132,16 @@ p {
   100% { transform: rotate(360deg); }
 }
 
+.chart-container {
+    width: 80%; /* Adjust width as needed */
+    margin: auto; /* Center the chart horizontally */
+}
+
+#spacer {
+    height: 500px; /* Adjust the height as needed to create enough space for the chart to scroll into view */
+}
+
+
 
         </style> 
 
@@ -156,14 +166,21 @@ p {
 
        <!-- <button id="runScriptButton">Run Python Script</button>-->
 
-       <canvas id="myChart" width="400" height="400"></canvas>
+       
 
     </div>
+
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    
 
     <div id="loading" class="loading">
         <div class="spinner"></div>
         <div class="loading-text">Collecting Data Now!</div>
     </div>
+
+    <div id="spacer"></div>
     
     <!-- Include Leaflet JavaScript file -->
     <!-- Make sure you put this AFTER Leaflet's CSS -->

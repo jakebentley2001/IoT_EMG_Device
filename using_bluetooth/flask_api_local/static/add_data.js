@@ -29,7 +29,9 @@
         });
 
         function fetchRecord() {
-            const recordNumber = 33;
+            const recordNumber = 34;
+
+            document.getElementById('myChart').scrollIntoView({ behavior: 'smooth' });
 
             if (recordNumber) {
                 fetch(`/get_recording?record_number=${recordNumber}`)  // Pass record number as a query parameter
