@@ -364,23 +364,3 @@ reselectButton.addEventListener("click", function() {
 
     addClickListener(polygonsWithMuscleNames)
 });
-
-
-document.getElementById('runScriptButton').addEventListener('click', function() {
-    fetch('/rundemo', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Result:', data.result);
-        // Handle response from the server as needed
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Handle errors
-    });
-});

@@ -1,7 +1,35 @@
-let myChart; // Variable to hold the chart instance
+
+        document.getElementById('runScriptButton').addEventListener('click', function() {
+
+            const loadingDiv = document.getElementById('loading');
+            loadingDiv.style.display = 'block';
+
+            fetch('/rundemo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Result:', data.result);
+
+                loadingDiv.style.display = 'none';
+
+                fetchRecord(data)
+                // Handle response from the server as needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+
+                loadingDiv.style.display = 'none';
+                // Handle errors
+            });
+        });
 
         function fetchRecord() {
-            const recordNumber = document.getElementById('record-number-input').value;
+            const recordNumber = 33;
 
             if (recordNumber) {
                 fetch(`/get_recording?record_number=${recordNumber}`)  // Pass record number as a query parameter
@@ -9,15 +37,10 @@ let myChart; // Variable to hold the chart instance
                     .then(data => {
                         const recordNumber = data.record_number;
                         const sensorData = data.data;  // Replace with actual data field name
-                        
-                        // Clear existing chart if it exists
-                        if (myChart) {
-                            myChart.destroy();
-                        }
 
                         // Chart.js configuration
                         const ctx = document.getElementById('myChart').getContext('2d');
-                        myChart = new Chart(ctx, {
+                        const myChart = new Chart(ctx, {
                             type: 'line',  // Choose chart type (e.g., line, bar, pie)
                             data: {
                             labels: [...Array(sensorData.length).keys()],  // Generate labels for data points
@@ -44,3 +67,5 @@ let myChart; // Variable to hold the chart instance
                 alert("Please enter a valid record number.");
             }
         }
+
+       

@@ -93,6 +93,46 @@ p {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add box shadow for depth */
 }
 
+/* Styles for the loading animation */
+.loading {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  z-index: 1000; /* Make sure it's on top of other elements */
+}
+.loading-text {
+    position: absolute;
+    top: calc(50% + 100px); /* Adjust the vertical position of the text */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    color: #333; /* Text color */
+  }
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1); /* Light border */
+  border-top: 4px solid #333; /* Darker top border */
+  border-radius: 50%; /* Make it a circle */
+  animation: spin 1s linear infinite; /* Spin animation */
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
         </style> 
 
     
@@ -116,9 +156,14 @@ p {
 
        <!-- <button id="runScriptButton">Run Python Script</button>-->
 
+       <canvas id="myChart" width="400" height="400"></canvas>
+
     </div>
 
-    
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Collecting Data Now!</div>
+    </div>
     
     <!-- Include Leaflet JavaScript file -->
     <!-- Make sure you put this AFTER Leaflet's CSS -->
@@ -127,6 +172,9 @@ p {
          crossorigin=""></script>
 
     <script src= "static/script.js" ></script>
+    <script src= "static/add_data.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </body>
 </html>
 

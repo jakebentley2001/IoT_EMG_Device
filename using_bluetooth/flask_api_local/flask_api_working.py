@@ -4,7 +4,6 @@ from python_script import run_python_script
 
 
 app = Flask(__name__ )
-#socketio = SocketIO(app, cors_allowed_origins="*",path = '/socket.io')
 
 # Connect to MongoDB
 client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
@@ -14,7 +13,6 @@ collection = db['muscle_data']
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route('/get_recording', methods=['GET'])
 def get_recording():
@@ -44,11 +42,13 @@ def save_coordinates():
 
 @app.route('/rundemo', methods=['POST'])
 def run_demo():
-    result_list = run_python_script()
-    # Convert the list to JSON and send it back as a response
-    return jsonify(result=result_list)
-    
+    # Code to execute your Python script
+    # For example:
+    print("Python script is attempting to run")
+    result = run_python_script()
+
+    # Optionally, send a response back to the client
+    return {'result': result}
 
 if __name__ == "__main__":
-    #socketio.run(app, host='0.0.0.0', port=3000)
     app.run(debug=True)
