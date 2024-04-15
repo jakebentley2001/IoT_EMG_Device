@@ -2,6 +2,10 @@ var map = L.map('map');
 
 document.getElementById('h1').scrollIntoView({ behavior: 'smooth' })
 
+var muscle_Name
+console.log(my_variable_js);
+const record_number = parseInt(my_variable_js);
+
 var pec_major = L.polygon([[79.6556, 36.7382],[80.1336, 42.1875],[80.2235, 50.1855],[78.3671, 50.8007],[77.9707, 47.1972],[78.2782, 38.9355],[79.08846, 37.7050]]).addTo(map);  
 var pec_major2 = L.polygon([[80.1787, 54.1406], [78.3494, 53.4375], [77.8418, 58.1836], [78.1526, 65.5664], [78.3849, 66.9727], [79.5923, 68.0273], [80.0884, 62.4023], [80.2236, 55.2832], [80.1937, 54.2285]]).addTo(map);
 var lat = L.polygon([[78.8361, 132.0117], [78.87, 139.834],[78.2424, 142.1191], [77.6177, 145.2832], [75.431, 145.0195],[72.6858, 143.1738], [73.3279, 139.4824], [74.8679, 135.6152],[76.6189, 134.5605], [78.0073, 132.627]]).addTo(map);  
@@ -249,10 +253,10 @@ map.zoomIn();
         attachClickEventListeners(rectus_femoris,rectus_femoris2);
 
 
-// Set the opacity of the map container to make the map transparent
-
 // Function to make the image overlay transparent
 function makeImageOverlayTransparent(muscleName) {
+
+    muscle_Name = muscleName
 
     if (!polygonsInteractive) return;
     imageOverlay.setOpacity(0.5); // Adjust the opacity as needed
@@ -365,4 +369,13 @@ reselectButton.addEventListener("click", function() {
     attachClickEventListeners(rectus_femoris,rectus_femoris2);
 
     addClickListener(polygonsWithMuscleNames)
+});
+
+document.getElementById('resetButton').addEventListener('click', function() {
+    // Reload the page
+
+    location.reload();
+
+    document.getElementById('h1').scrollIntoView({ behavior: 'smooth' })
+
 });

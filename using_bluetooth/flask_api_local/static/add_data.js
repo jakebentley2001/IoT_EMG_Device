@@ -4,7 +4,10 @@
             const loadingDiv = document.getElementById('loading');
             loadingDiv.style.display = 'block';
 
-            fetch('/rundemo', {
+            //const recordNumber = record_number;
+            //var muscle = muscle_Name
+
+            fetch(`/rundemo?record_number=${record_number}&muscle_type=${muscle_Name}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,25 +32,26 @@
         });
 
         function fetchRecord() {
-            const recordNumber = 35;
+            const recordNumber = record_number
+            //var muscle_type = 
 
             document.getElementById('myChart').scrollIntoView({ behavior: 'smooth' });
 
             if (recordNumber) {
-                fetch(`/get_recording?record_number=${recordNumber}`)  // Pass record number as a query parameter
+                fetch(`/get_recording?record_number=${record_number}&muscle_type=${muscle_Name}`)  // Pass record number as a query parameter
                     .then(response => response.json())
                     .then(data => {
                         const recordNumber = data.record_number;
-                        const sensorData = data.data;  // Replace with actual data field name
+                        let sensorData = data.data;  // Replace with actual data field name
 
                         // Chart.js configuration
-                        const ctx = document.getElementById('myChart').getContext('2d');
-                        const myChart = new Chart(ctx, {
+                        let ctx = document.getElementById('myChart').getContext('2d');
+                        let myChart = new Chart(ctx, {
                             type: 'line',  // Choose chart type (e.g., line, bar, pie)
                             data: {
                             labels: [...Array(sensorData.length).keys()],  // Generate labels for data points
                             datasets: [{
-                                label: `Record #${recordNumber}`,
+                                label: `Record #${record_number} and Muscle Type: ${muscle_Name}`,
                                 data: sensorData,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -68,6 +72,8 @@
             } else {
                 alert("Please enter a valid record number.");
             }
+            record_number = record_number + 1
         }
 
-       
+ 
+        

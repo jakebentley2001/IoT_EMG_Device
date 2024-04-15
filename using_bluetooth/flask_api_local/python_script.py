@@ -7,12 +7,12 @@ from pymongo import MongoClient
 from bleak import BleakClient
 import time
 
-def run_python_script():
+def run_python_script(record, muscle_type):
     # Connect to MongoDB
     client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstance0.hzqw4sr.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0')
     db = client['IOT_DEVICE']
     collection = db['muscle_data']
-    record = "35"
+    record_num = str(record)
     #muscle = muscle
     
 
@@ -43,7 +43,7 @@ def run_python_script():
 
                 await asyncio.sleep(0.05)
                 
-        data_to_insert = {"record_number": record, "data": [time_data, sensor_data]}
+        data_to_insert = {"record_number": record_num, "muscle_type": muscle_type,"data": [time_data, sensor_data]}
         if data_to_insert:
             collection.insert_one(data_to_insert)
                 
@@ -56,3 +56,4 @@ def run_python_script():
     loop.run_until_complete(read_data(device_address))
     
     return record
+

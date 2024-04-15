@@ -11,27 +11,25 @@ client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstan
 db = client['IOT_DEVICE']
 collection = db['muscle_data']
 
+my_variable = 15
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html',my_variable=my_variable)
 
 
 @app.route('/get_recording', methods=['GET'])
 def get_recording():
+
     record_number = request.args.get('record_number')
-    
-    # document = collection.find().sort([('createdAt', -1)]).limit(1)
-    
-    # if document:
-    #     sensor_data = document['data'][1]
-    #     time_data = document['data'][0]
-    #     return jsonify({"record_number": 12, "data": sensor_data})
-    # else:
-    #     return jsonify({"error": "Record not found"}), 404
+    muscle_type = request.args.get('muscle_type')
+    print("getting recording")
+    print(record_number)
+    print(muscle_type)
 
     if record_number:
         try:
-            document = collection.find_one({"record_number": record_number})
+            document = collection.find_one({"record_number": record_number, "muscle_type": muscle_type})
             if document:
                 sensor_data = document['data'][1]
                 time_data = document['data'][0]
@@ -53,7 +51,13 @@ def save_coordinates():
 
 @app.route('/rundemo', methods=['POST'])
 def run_demo():
-    result_list = run_python_script()
+    print("starting to record")
+    record_number = request.args.get('record_number')
+    muscle_type = request.args.get('muscle_type')
+    print(record_number)
+    print(muscle_type)
+    
+    result_list = run_python_script(record_number,muscle_type)
     # Convert the list to JSON and send it back as a response
     return jsonify(result=result_list)
     
