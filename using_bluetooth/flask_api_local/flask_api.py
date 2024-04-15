@@ -11,10 +11,12 @@ client = MongoClient('mongodb+srv://jakebentley2001:Sonicpower4@serverlessinstan
 db = client['IOT_DEVICE']
 collection = db['muscle_data']
 
-my_variable = 15
+my_variable = 0
 
 @app.route('/')
 def index():
+    global my_variable
+    my_variable += 1
     return render_template('index.html',my_variable=my_variable)
 
 
